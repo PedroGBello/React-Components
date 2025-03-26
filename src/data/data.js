@@ -1,32 +1,48 @@
 export const data = [
 	{
-		id: "7cf66a82-31db-463b-bffc-b10b4af2dfff",
-		images: [
-			"../../public/assets/7cf66a82-31db-463b-bffc-b10b4af2dfff.webp",
-		],
-		product_seller: null,
-		is_verified: false,
-		product_brand: null,
+		// 1. Identification
+		id: "d9336033-d331-4450-86fc-a7831246de69",
+		category: "kitchen",
 		product_name:
-			"Rack Organizador De Cocina 65cm Escurridor Seca Platos Color Negro",
-		product_rating: {
-			rating_stars: 45,
-			rating_quantity: 337,
-		},
-		sale: "más vendido", // más vendido / oferta del día / oferta relámpago
-		currency: "ARS",
-		current_cents: 43068,
-		previous_cents: 60000,
-		has_discount: true,
-		same_price: 0,
-		installments: {
-			interest_free: 0,
-			surcharge: [6, 9543], // [cantidad de cuotas, monto]
-		},
+			"Organizador De Cocina Jazak 4 Niveles / Linea Hogar / Estanteria / Zapatero / Repisa / Calzado Ropa / Resitente 80kg / Facil De Armar / Acero / Estantes / Deco / Mide 60x70x23cm / Color Negro",
+		product_brand: null,
+
+		// 2. Media
+		images: [
+			"../../public/assets/d9336033-d331-4450-86fc-a7831246de69.webp",
+		],
+
+		// 3. Seller Information
+		seller_name: "Jazak",
+		seller_info: "",
+		is_verified_seller: false,
+
+		// 4. Stock & Shipping
+		stock_quantity: 15,
 		is_free_shipping: true,
-		is_delivered_tomorrow: false,
-		is_delivered_today: false,
+		is_same_day_delivery: false,
+		is_next_day_delivery: false,
+		shipping_provider: null,
+
+		// 5. Promotion & Discounts
+		promotion_type: "best_seller", // "best_seller" | "deal_of_the_day" | "flash_sale"
 		is_promoted: false,
-		delivered_by: null,
+		discount_percentage: 8, // Precomputed
+
+		// 6. Payment Options
+		currency: "AR",
+		original_price_cents: 4999900,
+		installments: {
+			interest_free_months: 0,
+			with_interest: {
+				months: 6,
+			},
+		},
+
+		// 7. Ratings & Reviews
+		rating: {
+			average_stars: 48,
+			total_reviews: 11,
+		},
 	},
 ];

@@ -7,14 +7,13 @@ import BookmarkButton from "./BookmarkButton.jsx";
 function SearchResult({
 	images,
 	product_name,
-	product_rating,
-	current_cents,
-	previous_cents,
-	has_discount,
+	rating,
+	original_price_cents,
 	installments,
+	discount_percentage,
 	is_free_shipping,
 }) {
-	const rating = product_rating.rating_stars / 10;
+	const average_rating = rating.average_stars / 10;
 
 	return (
 		<>
@@ -42,19 +41,24 @@ function SearchResult({
 								{product_name}
 							</a>
 						</h3>
-						<div className={styles["card-content__reviews"]}>
-							<span>{rating.toFixed(1)}</span>
-							<RatingStars rating={rating} />
-							<span>({product_rating.rating_quantity})</span>
-						</div>
+						{rating.total_reviews > 0 && (
+							<div className={styles["card-content__reviews"]}>
+								<span>{average_rating.toFixed(1)}</span>
+								<RatingStars average_rating={average_rating} />
+								<span>({rating.total_reviews})</span>
+							</div>
+						)}
 						<PriceSection
-							current_cents={current_cents}
-							previous_cents={previous_cents}
-							has_discount={has_discount}
+							original_price_cents={original_price_cents}
+							discount_percentage={discount_percentage}
 						/>
 						<InstallmentsSection
 							installments={installments}
-							current_cents={current_cents}
+							original_price_cents={original_price_cents}
+							discount_percentage={discount_percentage}
+							total_installments={
+								installments.with_interest.months
+							}
 						/>
 						{is_free_shipping && (
 							<strong className={styles["shipping"]}>

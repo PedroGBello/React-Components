@@ -1,0 +1,9 @@
+/* ! Use custom props and review CSS Grid vs CSS Flexbox */
+
+.search-results {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	list-style: none;
+	padding: 0;
+}

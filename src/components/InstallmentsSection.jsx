@@ -1,9 +1,24 @@
 import styles from "../components/SearchResult.module.css";
+import { calculateDiscountCents } from "../utils/calculations.js";
 
-const InstallmentsSection = ({ installments, current_cents }) => {
-	if (installments.interest_free) {
+const InstallmentsSection = ({
+	installments,
+	original_price_cents,
+	discount_percentage,
+	total_installments,
+}) => {
+	const INTEREST_CONSTANT = 1.329487;
+	const currentPriceCents = calculateDiscountCents(
+		original_price_cents,
+		discount_percentage
+	);
+	const amoutPerMonthCents = Math.round(
+		(currentPriceCents / total_installments) * INTEREST_CONSTANT
+	);
+
+	if (installments.interest_free_months) {
 		const interestFreeInstallment = Math.floor(
-			current_cents / installments.interest_free
+			currentPriceCents / installments.interest_free_months
 		);
 		return (
 			<span
@@ -12,25 +27,29 @@ const InstallmentsSection = ({ installments, current_cents }) => {
 					styles["price-section__installments--interest-free"],
 				].join(" ")}
 			>
-				Mismo precio en {installments.interest_free} cuotas de{" "}
+				Mismo precio en {installments.interest_free_months} cuotas de{" "}
 				<span className={styles["money-amount__currency-symbol"]}>
 					$
 				</span>
 				<span className={styles["money-amount__fraction"]}>
-					{interestFreeInstallment.toLocaleString("es-AR")}
+					{Math.floor(interestFreeInstallment / 100).toLocaleString(
+						"es-AR"
+					)}
 				</span>
 			</span>
 		);
 	} else {
 		return (
 			<span className={styles["price-section__installments"]}>
-				en {installments.surcharge[0]} cuotas de{" "}
+				en {installments.with_interest.months} cuotas de{" "}
 				<span>
 					<span className={styles["money-amount__currency-symbol"]}>
 						$
 					</span>
 					<span className={styles["money-amount__fraction"]}>
-						{installments.surcharge[1].toLocaleString("es-AR")}
+						{Math.ceil(amoutPerMonthCents / 100).toLocaleString(
+							"es-AR"
+						)}
 					</span>
 				</span>
 			</span>
