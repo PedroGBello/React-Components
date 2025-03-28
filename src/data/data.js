@@ -1,37 +1,44 @@
 export const data = [
 	{
 		// 1. Identification
-		id: "d9336033-d331-4450-86fc-a7831246de69",
+		id: "3c1af988-895d-442a-a211-92f982c96d7c",
 		category: "kitchen",
 		product_name:
-			"Organizador De Cocina Jazak 4 Niveles / Linea Hogar / Estanteria / Zapatero / Repisa / Calzado Ropa / Resitente 80kg / Facil De Armar / Acero / Estantes / Deco / Mide 60x70x23cm / Color Negro",
-		product_brand: null,
+			"Secaplatos escurridor cubiertos kunst & küche 2 pisos organizador acero color gris",
+		product_brand: "Kunst & Küche",
 
 		// 2. Media
 		images: [
-			"../../public/assets/d9336033-d331-4450-86fc-a7831246de69.webp",
+			"../../public/assets/3c1af988-895d-442a-a211-92f982c96d7c.webp",
 		],
 
 		// 3. Seller Information
-		seller_name: "Jazak",
+		seller_name: "Proshop",
 		seller_info: "",
-		is_verified_seller: false,
+		is_verified_seller: true,
 
 		// 4. Stock & Shipping
-		stock_quantity: 15,
-		is_free_shipping: true,
+		stock_quantity: null, // if 1, "Último disponible"
+		is_free_shipping: false,
 		is_same_day_delivery: false,
-		is_next_day_delivery: false,
-		shipping_provider: null,
+		is_next_day_delivery: true,
+		shipping_provider: "Full",
 
 		// 5. Promotion & Discounts
-		promotion_type: "best_seller", // "best_seller" | "deal_of_the_day" | "flash_sale"
-		is_promoted: false,
-		discount_percentage: 8, // Precomputed
+		highlight: {
+			best_seller: false,
+			deal_of_the_day: false,
+			flash_sale: true,
+		},
+
+		is_promoted: true,
+		discount_percentage: 29, // Precomputed
+		rebates: 15,
+		coupon: 5000,
 
 		// 6. Payment Options
 		currency: "AR",
-		original_price_cents: 4999900,
+		original_price_cents: 6000000,
 		installments: {
 			interest_free_months: 0,
 			with_interest: {
@@ -41,8 +48,8 @@ export const data = [
 
 		// 7. Ratings & Reviews
 		rating: {
-			average_stars: 48,
-			total_reviews: 11,
+			average_stars: 42,
+			total_reviews: 480,
 		},
 	},
 ];

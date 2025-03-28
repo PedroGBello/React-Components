@@ -1,40 +1,70 @@
 :root {
 	/* Font Weights */
-	--fw-3: 300;
-	--fw-4: 400;
-	--fw-6: 600;
+	--fontWeight-light: 300;
+	--fontWeight-regular: 400;
+	--fontWeight-bold: 600;
 
 	/* Font Sizes */
-	--fs-smaller: 12px;
-	--fs-small: 14px;
-	--fs-medium: 16px;
-	--fs-large: 24px;
+	--fontSize-xs: 12px;
+	--fontSize-sm: 14px;
+	--fontSize-md: 16px;
+	--fontSize-lg: 24px;
 
 	/* Line Heights */
-	--lh-small: 18px;
+	--lineHeight-xs: 15px;
+	--lineHeight-sm: 18px;
+	--lineHeight-md: 21.6px;
 
 	/* Colors */
-	--clr-green: #00a650;
-	--clr-blue: #3483fa;
+	--clr-green: rgb(0 168 80);
+	--clr-blue: rgb(52, 131, 250);
+	--clr-blue-light: rgba(65, 137, 230, 0.2);
+	--clr-blue-link: rgb(41, 104, 199);
+
 	--clr-primary-light: rgba(0, 0, 0, 0.55);
-	--clr-primary-dark: #213547;
-	--clr-background: #ffffff;
+	--clr-primary-dark: rgb(33, 53, 71);
+
+	--clr-neutral-light: rgb(255, 255, 255);
+	--clr-neutral-dark: rgba(0 0 0);
+	--clr-neutral-dark--10: rgb(from var(--clr-neutral-dark) r g b / 10%);
+	--clr-neutral-dark--90: rgb(from var(--clr-neutral-dark) r g b / 90%);
+
+	--clr-flashSale: #ba0095;
+	--clr-dealOfTheDay: var(--clr-blue);
+	--clr-bestSeller: #ff7733;
 
 	/* Border Radius */
-	--br: 6px;
+	--borderRadius-sm: 2px;
+	--borderRadius-md: 6px;
 
 	/* Layouts */
 	--max-width: 284px;
 	--gallery-min-width: 150px;
 	--gallery-max-height: 150px;
-	--space-general: 4px;
+
+	--space-xs: calc(var(--space-md) * 0.5);
+	--space-sm: calc(var(--space-md) * 0.75);
+	--space-md: 4px;
+	--space-lg: calc(var(--space-md) * 3);
+	--space-xl: calc(var(--space-md) * 4);
+	--space-xxl: calc(var(--space-md) * 5);
 
 	/* Shadows */
-	--box-shadow-light: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
-	--box-shadow-hover: 0 6px 16px 0 rgba(0, 0, 0, 0.1);
+	--boxShadow-light: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+	--boxShadow-hover: 0 6px 16px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Card Component */
+/* === GENERAL STYLES === */
+
+.ui-search-result__wrapper {
+	width: var(--max-width);
+	color: var(--clr-primary-dark);
+	font-family: var(--ff);
+	line-height: var(--lineHeight-md);
+	border-radius: var(--borderRadius-md);
+}
+
+/* === Card Component === */
 
 .card {
 	display: flex;
@@ -42,26 +72,26 @@
 	position: relative;
 	border-radius: inherit;
 	min-width: var(--gallery-min-width);
-	background-color: var(--clr-background);
-}
-
-.ui-search-result__wrapper {
-	box-sizing: border-box;
-	width: var(--max-width);
-	color: var(--clr-primary-dark);
-	font-family: var(--ff);
-	font-weight: var(--fw-3);
-	line-height: 21.6px;
-
-	border-radius: var(--br);
+	background-color: var(--clr-neutral-light);
+	text-size-adjust: 100%;
 }
 
 .card-gallery {
-	margin-bottom: var(--space-general);
+	margin-bottom: var(--space-md);
 	min-height: var(--gallery-max-height);
 	aspect-ratio: 1 / 1;
-	border-top-left-radius: var(--br);
-	border-top-right-radius: var(--br);
+	border-top-left-radius: var(--borderRadius-md);
+	border-top-right-radius: var(--borderRadius-md);
+	position: relative;
+}
+
+.card-gallery::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: -1px;
+	background-color: var(--clr-neutral-dark--10);
 }
 
 .card-gallery__picture {
@@ -75,59 +105,125 @@
 .card-content {
 	display: flex;
 	flex-direction: column;
-	padding-inline: calc(var(--space-general) * 4);
-	padding-bottom: calc(var(--space-general) * 4);
+	padding-inline: var(--space-xl);
+	padding-bottom: var(--space-xl);
+}
+
+/* === HIGHLIGHTS === */
+
+.highlight {
+	margin-top: var(--space-xxl);
+	border-radius: var(--borderRadius-sm);
+	font-size: var(--fontSize-xs);
+	font-weight: var(--fontWeight-bold);
+	height: fit-content;
+	width: fit-content;
+	line-height: var(--lineHeight-xs);
+	padding-inline: var(--space-md);
+	padding-top: var(--space-sm);
+	padding-bottom: var(--space-xs);
+	color: var(--clr-neutral-light);
+}
+
+.highlight--flash_sale {
+	background-color: var(--clr-flashSale);
+}
+.highlight--deal_of_the_day {
+	background-color: var(--clr-dealOfTheDay);
+}
+.highlight--best_seller {
+	background-color: var(--clr-bestSeller);
+}
+
+/* === BRAND & TITLE === */
+
+.brand {
+	margin-top: var(--space-xl);
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	color: var(--clr-neutral-dark--90);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-bold);
+	line-height: var(--lineHeight-sm);
 }
 
 .card-content__title-wrapper {
-	margin-top: calc(var(--space-general) * 4);
-	margin-bottom: var(--space-general);
-	font-weight: var(--fw-4);
+	margin-top: var(--space-xl);
+	margin-bottom: var(--space-md);
+	font-weight: var(--fontWeight-regular);
+}
+
+.brand + .card-content__title-wrapper {
+	margin-top: 0;
 }
 
 .card-content__title {
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-	font-size: var(--fs-small);
-	line-height: var(--lh-small);
+	font-size: var(--fontSize-sm);
+	line-height: var(--lineHeight-sm);
 	overflow: hidden;
-	color: rgba(0, 0, 0, 0.9);
+	color: var(--clr-neutral-dark);
 }
 
-/* Reviews */
+/* === SELLER INFO === */
+
+.card-content__seller-wrapper {
+	display: flex;
+}
+
+.seller {
+	margin-bottom: var(--space-md);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-regular);
+	line-height: var(--lineHeight-sm);
+	color: var(--clr-primary-light);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-md);
+}
+
+.cockade {
+	color: var(--clr-blue);
+}
+
+/* === REVIEWS === */
 
 .card-content__reviews {
 	display: flex;
 	align-items: center;
-	font-size: var(--fs-small);
-	font-weight: var(--fw-4);
-	line-height: var(--lh-small);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-regular);
+	line-height: var(--lineHeight-sm);
 	color: var(--clr-primary-light);
+}
 
-	.reviews__stars {
-		display: flex;
-		margin-inline: var(--space-general);
-	}
+.reviews__stars {
+	display: flex;
+	margin-inline: var(--space-md);
 }
 
 .reviews__star-icon {
 	color: var(--clr-blue);
-	font-size: var(--fs-medium);
+	font-size: var(--fontSize-md);
 }
 
-/* Pricing section */
+/* === PRICING === */
 
 .card-content__price-section {
 	display: flex;
 	flex-direction: column;
-	margin-top: calc(var(--space-general) * 3);
+	margin-top: var(--space-lg);
 }
 
 .price-section__previous {
-	font-size: var(--fs-smaller);
+	font-size: var(--fontSize-xs);
 	color: var(--clr-primary-light);
+	font-weight: var(--fontWeight-regular);
 	text-decoration: none;
+	position: relative;
 
 	/* Strikethrough */
 	.money-amount__currency-symbol::after,
@@ -144,26 +240,26 @@
 .price-section__current {
 	display: flex;
 	flex-wrap: wrap;
-	font-size: var(--fs-large);
-	font-weight: var(--fw-4);
+	font-size: var(--fontSize-lg);
+	font-weight: var(--fontWeight-regular);
 	line-height: 1.25em;
-	margin-bottom: var(--space-general);
+	margin-bottom: var(--space-md);
 }
 
 .price-section__current .money-amount__fraction {
-	margin-right: calc(var(--space-general) * 2);
+	margin-right: calc(var(--space-md) * 2);
 }
 
 .price-section__current--discount {
 	color: var(--clr-green);
-	font-size: var(--fs-small);
+	font-size: var(--fontSize-sm);
 }
 
 .price-section__installments {
-	font-size: var(--fs-small);
-	font-weight: var(--fw-4);
-	line-height: var(--lh-small);
-	margin-bottom: var(--space-general);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-regular);
+	line-height: var(--lineHeight-sm);
+	margin-bottom: var(--space-md);
 }
 
 .price-section__installments--interest-free {
@@ -184,19 +280,99 @@
 .shipping {
 	align-items: center;
 	color: var(--clr-green);
-	font-size: var(--fs-small);
-	font-weight: var(--fw-6);
-	line-height: var(--lh-small);
-	margin-top: calc(var(--space-general) * 2);
-	margin-bottom: var(--space-general);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-bold);
+	line-height: var(--lineHeight-sm);
+	margin-top: calc(var(--space-md) * 2);
+	border-radius: var(--borderRadius-sm);
+}
+
+.rebates {
+	margin-top: calc(var(--space-md) * 2);
+	margin-bottom: var(--space-md);
+}
+
+.rebates > span {
+	line-height: var(--lineHeight-sm);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-bold);
+	background: var(--clr-blue-light);
+	color: var(--clr-blue);
+	padding-inline: var(--space-md);
+	width: fit-content;
+}
+
+.coupons {
+	margin-top: calc(var(--space-md) * 2);
+	margin-bottom: var(--space-md);
+	display: flex;
+}
+
+.coupons__pill {
+	background-color: var(--clr-blue-light);
+	border-radius: var(--borderRadius-sm);
+	color: var(--clr-blue);
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-bold);
+	line-height: var(--lineHeight-sm);
+	padding-inline: var(--space-md);
+}
+
+.coupon-icon {
+	display: inline-block;
+	transform: translateY(2px);
+	margin-right: var(--space-md);
+}
+
+.shipping--same_day {
+	font-weight: var(--fontWeight-bold);
+	background: var(--clr-green);
+	color: var(--clr-neutral-light);
+	padding-inline: var(--space-md);
+}
+
+.shipping--next_day {
+	font-weight: var(--fontWeight-bold);
+	background-color: rgb(from var(--clr-green) r g b / 10%);
+	color: var(--clr-green);
+	padding-inline: var(--space-md);
+}
+
+/* Footer Promotion */
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-inline: var(--space-xl);
+	padding-bottom: var(--space-xl);
+}
+
+a {
+	transition: color 0.2s ease-in-out;
+}
+
+a:hover:not(.card-content__title) {
+	color: var(--clr-blue-link);
+}
+
+.ads-promotion {
+	display: flex;
+	margin-top: var(--space-lg);
+	justify-content: flex-end;
+	font-size: var(--fontSize-sm);
+	font-weight: var(--fontWeight-light);
+	color: var(--clr-primary-light);
+	cursor: pointer;
+	width: 100%;
 }
 
 /* Bookmark Button */
 
 .bookmark {
 	position: absolute;
-	top: calc(var(--space-general) * 2);
-	right: calc(var(--space-general) * 2);
+	top: calc(var(--space-md) * 2);
+	right: calc(var(--space-md) * 2);
 	display: flex;
 	z-index: 3;
 }
@@ -207,7 +383,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgb(from var(--clr-neutral-light) r g b / 90%);
 	border: none;
 	border-radius: 50%;
 	cursor: pointer;
@@ -221,14 +397,14 @@
 
 .bookmark__icon {
 	color: var(--clr-blue);
-	font-size: var(--fs-large);
+	font-size: var(--fontSize-lg);
 	stroke-width: 8;
 }
 
 /* Shadows */
 
 .card--flat {
-	box-shadow: var(--box-shadow-light);
+	box-shadow: var(--boxShadow-light);
 }
 
 .card--animated {
@@ -236,6 +412,6 @@
 }
 
 .card--animated:hover {
-	box-shadow: var(--box-shadow-hover);
+	box-shadow: var(--boxShadow-hover);
 	cursor: pointer;
 }
